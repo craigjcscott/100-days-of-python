@@ -11,7 +11,6 @@ import time
 from termcolor import colored
 import wordle_answers
 import wordle_guesses
-import wordle_alphabets
 
 possible_answers = wordle_answers.possible_answers
 allowed_guesses = wordle_guesses.allowed_guesses
