@@ -1,10 +1,3 @@
-# TODO
-
-# restrict guesses to allowed guesses list
-# Restart the loop upon a previous guess
-
-# Create a new display variable for each guess, and then show all of them each turn
-
 import random
 import os
 import time
@@ -18,31 +11,31 @@ allowed_guesses = wordle_guesses.allowed_guesses
 answer = random.choice(possible_answers)
 
 game_finished = False
-player_wins = False
-player_loses = False
 hard_mode = False
 guesses_remaining = 6
 previous_guesses = []
 dead_letters = []
 
-display = ['_','_','_','_','_']
-display_array = [['_','_','_','_','_'],
-				 ['_','_','_','_','_'],
-				 ['_','_','_','_','_'],
-				 ['_','_','_','_','_'],
-				 ['_','_','_','_','_'],
-				 ['_','_','_','_','_']]
+display = ['_', '_', '_', '_', '_']
+
+display_array = [	['_', '_', '_', '_', '_'],
+					['_', '_', '_', '_', '_'],
+					['_', '_', '_', '_', '_'],
+					['_', '_', '_', '_', '_'],
+					['_', '_', '_', '_', '_'],
+					['_', '_', '_', '_', '_']	
+				]
 
 os.system('clear')
 
 for row in display_array:
-	print(f"{' '.join(row)} \n")
+	print(f"\n {' '.join(row)}")
 
 # For dev use, remove upon completion.
 # answer = 'tears'
 # print(f'psst, the answer is {answer}')
 
-while game_finished == False:
+while not game_finished:
 
 	guess = input("\n Guess a word: ").lower()
 	
@@ -58,7 +51,6 @@ while game_finished == False:
 	elif guess == answer:
 		guesses_remaining -= 1
 		game_finished = True
-		player_wins = True
 		print("\n Congratulations! You win!")
 	else:
 		for position in range(0,5):
@@ -80,11 +72,4 @@ while game_finished == False:
 
 	if guesses_remaining == 0:
 		game_finished = True
-		player_loses = True
 		print(F"Oh no! You lose. The correct answer was {answer}")
-  
-
-	# os.system('clear')
-  
-		
-    
