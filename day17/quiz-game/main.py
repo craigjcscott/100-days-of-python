@@ -4,9 +4,9 @@ from quiz_brain import QuizBrain
 
 question_bank = []
 for question in question_data:
-    question_bank.append(Question(question['text'], question['answer']))
+    question_bank.append(Question(question['question'], question['correct_answer']))
 
-quiz = quiz = QuizBrain(question_bank)
+quiz = QuizBrain(question_bank)
 
-while quiz.quiz_not_finished():
+while quiz.more_questions_remaining():
     quiz.next_question()
