@@ -1,29 +1,44 @@
 from turtle import Screen
 from snake import Snake
 from food import Food
+from scoreboard import Scoreboard
 import time
 
+WINDOW_WIDTH = 600
+WINDOW_HEIGHT = 600
+MAX_X = WINDOW_WIDTH / 2 - 20
+MAX_Y = WINDOW_HEIGHT / 2 - 20
+
 screen = Screen()
-screen.setup(width=600, height=600)
+screen.setup(width=WINDOW_WIDTH, height=WINDOW_HEIGHT)
 screen.bgcolor("black")
 screen.title("Snake")
 screen.tracer(0)
 
 snake = Snake()
 food = Food()
+scoreboard = Scoreboard()
 
-while abs(snake.snake_body[0].xcor()) <= 280 and abs(snake.snake_body[0].ycor()) <= 280:
-    screen.listen()
-    screen.onkey(key="Up", fun=snake.up)
-    screen.onkey(key="Down", fun=snake.down)
-    screen.onkey(key="Left", fun=snake.left)
-    screen.onkey(key="Right", fun=snake.right)
+screen.listen()
+screen.onkey(key="Up", fun=snake.up)
+screen.onkey(key="Down", fun=snake.down)
+screen.onkey(key="Left", fun=snake.left)
+screen.onkey(key="Right", fun=snake.right)
 
+game_running = True
+while game_running:
     screen.update()
     time.sleep(snake.speed)
     snake.move()
 
-    if (round(snake.snake_body[0].xcor()) == food.xcor) and (round(snake.snake_body[0].ycor()) == food.ycor):
-        print('hello')
+    if food.distance(snake.head) < 1:
+        scoreboard.add_score()
+        food.move_food()
+
+    if abs(snake.head.xcor()) > MAX_X or abs(snake.head.ycor()) > MAX_Y:
+        game_running = False
+        print("Game Over")
+        scoreboard.game_over()
+
 
 screen.exitonclick()
