@@ -2,7 +2,7 @@ from turtle import Turtle
 STARTING_POS_X = 0
 STARTING_POS_Y = 0
 STARTING_LENGTH = 3
-STARTING_SPEED = 0.05
+STARTING_SPEED = 0.1
 MOVEMENT_DISTANCE = 20
 RIGHT = 0
 UP = 90
@@ -26,8 +26,22 @@ class Snake:
             new_square.setposition(STARTING_POS_X - MOVEMENT_DISTANCE * i, STARTING_POS_Y)
             self.snake_body.append(new_square)
 
-    # def grow_snake(self):
-    #
+    def grow_snake(self):
+        new_square = Turtle()
+        new_square.penup()
+        new_square.color("white")
+        new_square.shape("square")
+        new_square.setposition(self.snake_body[-1].position())
+        self.snake_body.append(new_square)
+
+    def out_of_bounds(self, x_boundry, y_boundry):
+        if round(abs(self.head.xcor())) > x_boundry or round(abs(self.head.ycor())) > y_boundry:
+            return True
+
+    def head_touch_body(self):
+        for segment in self.snake_body[1:]:
+            if segment.distance(self.head) < 1:
+                return True
 
     def move(self, distance=MOVEMENT_DISTANCE):
         for segment_index in range(len(self.snake_body) - 1, 0, -1):

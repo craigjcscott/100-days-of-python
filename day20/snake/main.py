@@ -34,11 +34,11 @@ while game_running:
     if food.distance(snake.head) < 1:
         scoreboard.add_score()
         food.move_food()
+        snake.grow_snake()
 
-    if abs(snake.head.xcor()) > MAX_X or abs(snake.head.ycor()) > MAX_Y:
+    if snake.out_of_bounds(x_boundry=MAX_X, y_boundry=MAX_Y) or snake.head_touch_body() :
         game_running = False
         print("Game Over")
         scoreboard.game_over()
-
 
 screen.exitonclick()
