@@ -1,7 +1,7 @@
 from turtle import Turtle
 
 P1_PADDLE_START = -360
-P2_PADDLE_START = 350
+P2_PADDLE_START = 360
 MOVEMENT_DISTANCE = 20
 
 
@@ -21,9 +21,14 @@ class Paddle(Turtle):
         self.top = self.ycor() + 40
         self.bottom = self.ycor() - 40
 
-
     def up(self):
         self.forward(MOVEMENT_DISTANCE)
 
     def down(self):
         self.backward(MOVEMENT_DISTANCE)
+
+    def reset_position(self, player):
+        if self.player == 1:
+            self.setposition(P1_PADDLE_START, 0)
+        else:
+            self.setposition(P2_PADDLE_START, 0)

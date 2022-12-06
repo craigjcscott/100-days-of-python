@@ -1,5 +1,5 @@
 from turtle import Turtle
-
+import random
 
 class Ball(Turtle):
     def __init__(self):
@@ -15,17 +15,21 @@ class Ball(Turtle):
 
     def bounce_wall(self):
         self.move_y *= -1
-        # if self.heading() < 180:
-        #     self.setheading(self.heading() + 180)
-        # else:
-        #     self.setheading(self.heading() - 180)
 
-    def out_of_bounds(self, x_boundry):
-        if round(abs(self.xcor())) > x_boundry:
+    def score_goal(self, goal_line):
+        if 0 < goal_line < round(self.xcor()):
+            return True
+        elif round(self.xcor() < goal_line < 0):
             return True
 
     def bounce_paddle(self):
-        if self.heading() < 180:
-            self.setheading(self.heading() + 180)
-        else:
-            self.setheading(360 - self.heading())
+        self.move_x *= -1
+        self.move_x *= 1.1
+        self.move_y *= 1.1
+
+    def reset(self):
+        self.setposition(0, 0)
+        random_x = random.choice([-1,1])
+        random_y = random.choice([-1,1])
+        self.move_x = 10 * random_x
+        self.move_y = 10 * random_y
