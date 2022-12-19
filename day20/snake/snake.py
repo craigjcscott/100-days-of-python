@@ -25,6 +25,7 @@ class Snake:
             new_square.shape("square")
             new_square.setposition(STARTING_POS_X - MOVEMENT_DISTANCE * i, STARTING_POS_Y)
             self.snake_body.append(new_square)
+        self.head = self.snake_body[0]
 
     def grow_snake(self):
         new_square = Turtle()
@@ -33,6 +34,12 @@ class Snake:
         new_square.shape("square")
         new_square.setposition(self.snake_body[-1].position())
         self.snake_body.append(new_square)
+
+    def reset_snake(self):
+        for block in self.snake_body:
+            block.goto(1000, 1000)  # off-screen
+        self.snake_body.clear()
+        self.create_snake()
 
     def out_of_bounds(self, x_boundry, y_boundry):
         if round(abs(self.head.xcor())) > x_boundry or round(abs(self.head.ycor())) > y_boundry:

@@ -4,14 +4,13 @@ import random
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 10
-SCREEN_Y = 600
-LANES = range(round(SCREEN_Y / 20 - 2))
-SCREEN_X = 600
+Y_LIM = 250
+X_LIM = 300
 
 
-class CarManager():
+
+class CarManager:
     def __init__(self):
-        self.n_cars = 1
         self.cars = []
 
     def create_car(self):
@@ -20,7 +19,7 @@ class CarManager():
         new_car.shape("square")
         new_car.shapesize(stretch_len=2)
         new_car.color(random.choice(COLORS))
-        new_car.setposition(300, random.randint(-280,280))
+        new_car.setpos(random.randint(X_LIM, X_LIM * 4), random.randint(-Y_LIM, Y_LIM))
         new_car.setheading(180)
         self.cars.append(new_car)
 
@@ -28,7 +27,7 @@ class CarManager():
         for car in self.cars:
             car.forward(MOVE_INCREMENT)
 
-    def delete_cars(self):
+    def reset_cars(self):
         for car in self.cars:
-            if car.xcor() < -300:
-                car.clear()
+            if car.xcor() < -X_LIM:
+                car.setpos(random.randint(X_LIM, X_LIM * 2 - 100), random.randint(-Y_LIM, Y_LIM))

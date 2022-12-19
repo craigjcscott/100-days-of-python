@@ -10,14 +10,18 @@ class Player(Turtle):
         super().__init__()
         self.penup()
         self.shape("turtle")
+        self.color("red", "green")
         self.setposition(STARTING_POSITION)
         self.setheading(90)
 
     def move(self):
         self.forward(MOVE_DISTANCE)
 
-    def reset(self):
+    def at_finish_line(self):
+        if self.ycor() >= 280:
+            return True
+        else:
+            return False
+
+    def next_level(self):
         self.setposition(STARTING_POSITION)
-
-
-

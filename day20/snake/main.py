@@ -37,8 +37,7 @@ while game_running:
         snake.grow_snake()
 
     if snake.out_of_bounds(x_boundry=MAX_X, y_boundry=MAX_Y) or snake.head_touch_body() :
-        game_running = False
-        print("Game Over")
-        scoreboard.game_over()
+        scoreboard.reset_game()
+        snake.reset_snake()
 
 screen.exitonclick()
