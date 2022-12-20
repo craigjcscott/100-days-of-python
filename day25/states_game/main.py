@@ -22,13 +22,19 @@ def write_state(state_name, x, y):
 
 
 prior_guesses = []
-correct_guesses = 0
-while correct_guesses < 50:
-    answer_state = screen.textinput(title=f"{correct_guesses}/50 guessed", prompt="Name a state!")
+correct_guesses = []
+while len(correct_guesses) < 50:
+    answer_state = screen.textinput(title=f"{len(correct_guesses)}/50 guessed", prompt="Name a state!")
     answer_state = answer_state.title()
 
-    if answer_state == "quit":
+    if answer_state == "Quit":
         game_running = False
+        states_to_learn = []
+        for state in state_names:
+            if state not in correct_guesses:
+                states_to_learn.append(state)
+        states_to_learn_df = pd.DataFrame(states_to_learn)
+        states_to_learn_df.to_csv("states_to_learn.csv")
         break
     elif answer_state in prior_guesses:
         print("Already guessed, please try again")
@@ -39,9 +45,11 @@ while correct_guesses < 50:
         state_y_cor = int(state_data.y)
         write_state(answer_state, state_x_cor, state_y_cor)
         prior_guesses.append(answer_state)
-        correct_guesses += 1
+        correct_guesses.append(answer_state)
     else:
         prior_guesses.append(answer_state)
+
+
 
 
 turtle.mainloop()  # use instead of screen.exitonclick since we need to click on the screen
