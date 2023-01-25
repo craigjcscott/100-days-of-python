@@ -9,10 +9,10 @@ def mile2km():
 
 window = tk.Tk()
 window.title("Mile to KM Converter")
-window.minsize(width=300, height=200)
-window.config(padx=50, pady=50)
+# window.minsize(width=300, height=200)
+window.config(padx=20, pady=20)
 
-input_miles = tk.Entry(width=8)
+input_miles = tk.Entry(width=5)
 input_miles.grid(row=0, column=1)
 
 miles_label = tk.Label(text="Miles")
@@ -24,7 +24,7 @@ is_equal_to_label.grid(row=1, column=0)
 km_label = tk.Label(text="Km")
 km_label.grid(row=1, column=2)
 
-result_label = tk.Label()
+result_label = tk.Label(text="0")
 result_label.grid(row=1, column=1)
 
 convert_button = tk.Button(text="Convert", command=mile2km)
